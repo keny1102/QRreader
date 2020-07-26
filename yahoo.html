@@ -1,9 +1,50 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title></title>
+    
 </head>
 <body>
-    <script  language="JavaScript" type="text/javascript" src="yahoo.js"></script>
+
+    <script>
+        function test() {
+        
+            var standalone = window.navigator.standalone,
+            userAgent = window.navigator.userAgent.toLowerCase(),
+            safari = /safari/.test( userAgent ),
+            ios = /iphone|iPod|ipad/.test( userAgent );
+            var text = null;
+
+            if( ios ) {
+                if ( !standalone && safari ) {
+                console.log("browser");
+                text = "browser";
+        
+             } else if ( standalone && !safari ) {
+                 console.log("standalone");
+                text = "standalone";
+            } else if ( !standalone && !safari ) {
+                 console.log("uiwebview");
+                text ="uiwebview";
+             };
+            } else {
+                 console.log("not iOS");
+                text = "not iOS";
+            };
+
+            
+            var elm = document.getElementById('test_line');
+        
+            elm.textContent = text;
+            elm.style.background = '#ffcccc';
+        
+        }
+        </script>
+
+        <p id="test_line">test</p>
+        <button onclick="test()">change</button>
+        
 </body>
+</html>
