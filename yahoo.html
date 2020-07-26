@@ -10,40 +10,34 @@
 
     <script>
         function test() {
-        
-            var standalone = window.navigator.standalone,
-            userAgent = window.navigator.userAgent.toLowerCase(),
-            safari = /safari/.test( userAgent ),
-            ios = /iphone|iPod|ipad/.test( userAgent );
-            var text = null;
+            
+            let userAgent = window.navigator.userAgent.toLowerCase();
+            //文字を小文字化。ユーザーエイジェント取得
+
+            let safari = /safari/.test( userAgent );
+            //webviewの場合もカメラの場合もsafariは入る。返り値boolean
+            let ios = /iphone|iPod|ipad/.test( userAgent );
+            let webview =/mobile/.test( userAgent );
+            //webviewの場合は/mobile/が入る。返り値boolean
+            let text = null;
+
 
             if( ios ) {
-                if ( !standalone && safari ) {
-                console.log("browser");
-                text = "browser";
+                if ( webview ) {
+                console.log("webview");
+                text = "webview";
         
-             } else if ( standalone && !safari ) {
-                 console.log("standalone");
-                text = "standalone";
-            } else if ( !standalone && !safari ) {
-                 console.log("uiwebview");
-                text ="uiwebview";
-             };
+             } else if ( !webview && safari ) {
+                 console.log("safari");
+                 text = "safari";
             } else {
                  console.log("not iOS");
-                text = "not iOS";
+                 text = "not iOS";
             };
 
-            
-            var elm = document.getElementById('test_line');
-        
+            var elm = document.getElementById('test_line');        
             elm.textContent = text;
             elm.style.background = '#ffcccc';
-            alert(text);
-            alert(userAgent);
-            alert(standalone);
-            
-            
         }
         </script>
 
